@@ -1,35 +1,36 @@
 import { GetServerSideProps } from 'next';
-import { AxiosResponse } from 'axios';
 import Head from 'next/head';
+import { AxiosResponse } from 'axios';
+import { toCamel } from 'convert-keys';
+
+import { Fish, ApiFish } from '~/models/Fish';
+import FishCard from '~/components/Fish';
 import axios from '~/utils/request';
-import { FishList } from '~/models/Fish';
 
-// import styles from '~/styles/style.module.scss';
+import styles from '~/styles/style.module.scss';
 
-export default function Home({ list }: { list: FishList }) {
-  if (process.browser) {
-    console.log(list);
-  }
+export default function Home({ list }: { list: Fish[] }) {
   return (
     <div>
       <Head>
         <title>Animal Crossing Fish List</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main></main>
-
-      <footer></footer>
+      <main className="container mx-auto py-10">
+        <div className={[styles.fishList, 'grid gap-8'].join(' ')}>
+          {list.map((fish) => (
+            <FishCard key={fish.id} {...fish} />
+          ))}
+        </div>
+      </main>
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res: AxiosResponse<FishList> = await axios.get('fish');
+  const res: AxiosResponse<ApiFish[]> = await axios.get('fish');
+  const list = res.data.map<Fish>(toCamel);
 
   return {
-    props: {
-      list: res.data
-    }
+    props: { list }
   };
 };

@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
-import '../styles/globals.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
+import '~/styles/globals.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
