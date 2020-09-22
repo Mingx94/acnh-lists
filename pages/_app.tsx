@@ -1,9 +1,14 @@
 import { AppProps } from 'next/app';
-import 'react-lazy-load-image-component/src/effects/opacity.css';
+import { Provider } from 'jotai';
+
 import '~/styles/globals.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <Provider>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 export default MyApp;
