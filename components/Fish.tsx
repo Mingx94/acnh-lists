@@ -1,8 +1,9 @@
-const FishCard = ({ name, iconUri, price }: Fish) => {
+import { memo } from 'react';
+
+const CreatureCard = ({ name, iconUri, price }: Fish) => {
   return (
     <div className="flex">
-      <div className="w-40 h-40 px-4 pt-2 pb-1 mx-auto rounded overflow-hidden shadow-lg text-center">
-        <h3 className="text-lg text-gray-800 font-bold">{name.nameTWzh}</h3>
+      <div className="max-w-full w-40 h-40 px-4 pt-2 pb-1 mx-auto rounded overflow-hidden shadow-lg text-center">
         <img
           className="inline"
           src={iconUri}
@@ -11,10 +12,11 @@ const FishCard = ({ name, iconUri, price }: Fish) => {
           alt={name.nameTWzh}
           loading="lazy"
         />
+        <h3 className="text-lg text-gray-800 font-bold">{name.nameTWzh}</h3>
         <p className="text-indigo-900">${price}</p>
       </div>
     </div>
   );
 };
 
-export default FishCard;
+export default memo(CreatureCard) as typeof CreatureCard;

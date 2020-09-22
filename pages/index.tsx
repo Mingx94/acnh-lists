@@ -4,13 +4,12 @@ import { AxiosResponse } from 'axios';
 import { useAtom } from 'jotai';
 import { toCamel } from 'convert-keys';
 
-import FishCard from '~/components/Fish';
 import axios from '~/utils/request';
-
-import styles from '~/styles/style.module.scss';
-import FilterInput from '~/components/FilterInput';
 import { hemisphere, searchMonth, searchName } from '~/atoms';
-import FilterMonth from '~/components/FilterMonth';
+
+import CreatureCard from '~/components/Fish';
+import FilterName from '~/containers/FilterName';
+import FilterMonth from '~/containers/FilterMonth';
 
 export default function Home({ list }: { list: Fish[] }) {
   const [name] = useAtom(searchName);
@@ -36,11 +35,11 @@ export default function Home({ list }: { list: Fish[] }) {
         <title>Animal Crossing Fish List</title>
       </Head>
       <main className="container mx-auto py-10">
-        <FilterInput placeholder="ex. 鱸魚" />
+        <FilterName />
         <FilterMonth />
-        <div className={[styles.fishList, 'grid gap-8 mt-5'].join(' ')}>
+        <div className="grid gap-4 p-2 sm:gap-8 grid-cols-auto-120">
           {filteredList.map((fish) => (
-            <FishCard key={fish.id} {...fish} />
+            <CreatureCard key={fish.id} {...fish} />
           ))}
         </div>
       </main>
