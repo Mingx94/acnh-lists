@@ -10,6 +10,7 @@ import { hemisphere, searchMonth, searchName } from '~/atoms';
 import CreatureCard from '~/components/Fish';
 import FilterName from '~/containers/FilterName';
 import FilterMonth from '~/containers/FilterMonth';
+import FilterHemis from '~/containers/FilterHemis';
 
 export default function Home({ list }: { list: Fish[] }) {
   const [name] = useAtom(searchName);
@@ -36,6 +37,7 @@ export default function Home({ list }: { list: Fish[] }) {
       </Head>
       <main className="container mx-auto py-10">
         <FilterName />
+        <FilterHemis />
         <FilterMonth />
         <div className="grid gap-4 p-2 sm:gap-8 grid-cols-auto-120">
           {filteredList.map((fish) => (
