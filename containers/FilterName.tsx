@@ -7,7 +7,7 @@ const FilterName = () => {
 
   return (
     <InputText
-      className="px-3"
+      className="px-3 w-full"
       label="搜尋"
       name="fish-search"
       placeholder="ex. 鱸魚"

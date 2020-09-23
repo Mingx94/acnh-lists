@@ -124,3 +124,5 @@ enum LocaleCamel {
 }
 
 type ReactNode = React.ReactNode;
+
+type OptionValue = string | number | null;

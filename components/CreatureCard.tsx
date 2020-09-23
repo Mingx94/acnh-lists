@@ -12,7 +12,7 @@ const CreatureCard = ({ name, iconUri, price }: Fish) => {
           alt={name.nameTWzh}
           loading="lazy"
         />
-        <h3 className="text-lg text-gray-800 font-bold">{name.nameTWzh}</h3>
+        <h4 className="text-base text-gray-700 font-bold">{name.nameTWzh}</h4>
         <p className="text-indigo-900">${price}</p>
       </div>
     </div>

@@ -1,31 +1,29 @@
 import { useAtom } from 'jotai';
 import { useCallback } from 'react';
-import { searchMonth } from '~/atoms';
+import { searchHour } from '~/atoms';
 import Select, { Option } from '~/components/Select';
 
-const months = Array.from(Array(12)).map((_, x) => x + 1) as Array<
-  NumRange<1, 13>
->;
+const months = Array.from(Array(24)).map((_, x) => x) as Array<NumRange<0, 24>>;
 
-const options = months.map((v) => ({ text: `${v}月`, value: v }));
+const options = months.map((v) => ({ text: `${v}`, value: v }));
 
-const FilterMonth = () => {
-  const [pickedMonth, setMonth] = useAtom(searchMonth);
+const FilterHour = () => {
+  const [pickedHour, setHour] = useAtom(searchHour);
   const selectChanged = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLSelectElement>) =>
-      setMonth(+value as typeof pickedMonth),
+      setHour(+value as typeof pickedHour),
     []
   );
 
   return (
     <Select
       className="px-3"
-      label="月份"
+      label="時間"
       name="month"
       onChange={selectChanged}
-      value={pickedMonth}
+      value={pickedHour}
     >
-      <Option value={-1}>全部</Option>
+      <Option value={0}>全部</Option>
       {options.map(({ text, value: optVal }) => (
         <Option key={optVal} value={optVal}>
           {text}
@@ -35,4 +33,4 @@ const FilterMonth = () => {
   );
 };
 
-export default FilterMonth;
+export default FilterHour;

@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 
 import { createContext, useContextSelector } from 'use-context-selector';
-import { OptionValue } from './Option';
 
 interface IContext<T extends OptionValue> {
   name: string;

@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import classNames from 'classnames';
 import { RadioProvider } from './context';
-import { OptionValue } from './Option';
 
 type Props<T extends OptionValue> = {
   className?: string;
@@ -22,10 +21,10 @@ const Radio = <T extends OptionValue>({
 }: Props<T>) => {
   return (
     <RadioProvider name={name} onChange={onChange} value={value}>
-      <fieldset className={classNames(className, 'flex flex-wrap py-3')}>
-        {label && <legend>{label}:</legend>}
+      <div className={classNames(className, 'flex flex-wrap py-3 items-center')}>
+        {label && <legend className="">{label}:</legend>}
         {children}
-      </fieldset>
+      </div>
     </RadioProvider>
   );
 };

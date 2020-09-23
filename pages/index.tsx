@@ -5,30 +5,38 @@ import { useAtom } from 'jotai';
 import { toCamel } from 'convert-keys';
 
 import axios from '~/utils/request';
-import { hemisphere, searchMonth, searchName } from '~/atoms';
+import { hemisphere, searchHour, searchMonth, searchName } from '~/atoms';
 
-import CreatureCard from '~/components/Fish';
+import CreatureCard from '~/components/CreatureCard';
 import FilterName from '~/containers/FilterName';
 import FilterMonth from '~/containers/FilterMonth';
 import FilterHemis from '~/containers/FilterHemis';
+import FilterHour from '~/containers/FilterHour';
 
 export default function Home({ list }: { list: Fish[] }) {
   const [name] = useAtom(searchName);
   const [month] = useAtom(searchMonth);
   const [hemisP] = useAtom(hemisphere);
+  const [hour] = useAtom(searchHour);
 
-  const filteredList = list.filter(
-    ({
-      name: { nameTWzh },
-      availability: { monthArrayNorthern, monthArraySouthern }
-    }) => {
-      const n = nameTWzh.includes(name);
-      const mthArray =
-        hemisP == 'north' ? monthArrayNorthern : monthArraySouthern;
-      const m = month ? mthArray.includes(month) : true;
-      return n && m;
-    }
-  );
+  const filteredList = list
+    .filter(
+      ({
+        name: { nameTWzh },
+        availability: { monthArrayNorthern, monthArraySouthern, timeArray }
+      }) => {
+        const n = nameTWzh.includes(name);
+        const mthArray =
+          hemisP == 'north' ? monthArrayNorthern : monthArraySouthern;
+        const m = month != -1 ? mthArray.includes(month) : true;
+        const h = hour != -1 ? timeArray.includes(hour) : true;
+
+        return n && m && h;
+      }
+    )
+    .sort((a, b) => {
+      return a.price - b.price;
+    });
 
   return (
     <div>
@@ -36,9 +44,12 @@ export default function Home({ list }: { list: Fish[] }) {
         <title>Animal Crossing Fish List</title>
       </Head>
       <main className="container mx-auto py-10">
-        <FilterName />
-        <FilterHemis />
-        <FilterMonth />
+        <div className="flex flex-wrap">
+          <FilterName />
+          <FilterHemis />
+          <FilterMonth />
+          <FilterHour />
+        </div>
         <div className="grid gap-4 p-2 sm:gap-8 grid-cols-auto-120">
           {filteredList.map((fish) => (
             <CreatureCard key={fish.id} {...fish} />

@@ -1,10 +1,10 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import classNames from 'classnames';
-import uniqueId from 'lodash/uniqueId';
 import { useName, useOnChange, useValue } from './context';
 
-export type OptionValue = string | number | null;
-export type TOption<T extends OptionValue> = {
+let ID = 1;
+
+type TOption<T extends OptionValue> = {
   value: T;
   children?: ReactNode;
 };
@@ -18,8 +18,8 @@ const Option = <T extends OptionValue>({
   value,
   children
 }: Props<T>) => {
-  const id = uniqueId();
   const name = useName();
+  const id = useMemo(() => name + '-radio-option-' + ID++, [name]);
   const onChange = useOnChange();
   const selectedValue = useValue();
   return (

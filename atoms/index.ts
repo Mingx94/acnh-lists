@@ -4,5 +4,9 @@ export const searchName = atom('');
 
 export const hemisphere = atom<'north' | 'south'>('north');
 
-const thisMonth = (new Date().getMonth() + 1) as MonthRange;
-export const searchMonth = atom<MonthRange | null>(thisMonth);
+const now = new Date();
+const currentMonth = (now.getMonth() + 1) as MonthRange;
+export const searchMonth = atom<MonthRange | -1>(currentMonth);
+
+const currentHour = now.getHours() as TimeRange;
+export const searchHour = atom<TimeRange | -1>(currentHour);
