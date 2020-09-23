@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import classNames from 'classnames';
 import uniqueId from 'lodash/uniqueId';
-import { useName } from './context';
+import { useName, useOnChange, useValue } from './context';
 
 export type OptionValue = string | number | null;
 export type TOption<T extends OptionValue> = {
@@ -11,19 +11,17 @@ export type TOption<T extends OptionValue> = {
 
 type Props<T extends OptionValue> = TOption<T> & {
   className?: string;
-  checked: boolean;
-  onChange: (value: T) => void;
 };
 
 const Option = <T extends OptionValue>({
   className,
-  checked,
   value,
-  children,
-  onChange
+  children
 }: Props<T>) => {
   const id = uniqueId();
   const name = useName();
+  const onChange = useOnChange();
+  const selectedValue = useValue();
   return (
     <label
       htmlFor={id}
@@ -33,7 +31,7 @@ const Option = <T extends OptionValue>({
         type="radio"
         name={name}
         id={id}
-        checked={checked}
+        checked={selectedValue == value}
         onChange={() => onChange(value)}
       />
       {children && <span className="ml-2">{children}</span>}

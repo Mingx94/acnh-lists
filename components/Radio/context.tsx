@@ -1,14 +1,38 @@
-import { createContext, ReactElement, useContext } from 'react';
+import { ReactElement } from 'react';
 
-const nameContext = createContext<string>('');
+import { createContext, useContextSelector } from 'use-context-selector';
+import { OptionValue } from './Option';
 
-type Props = {
+interface IContext<T extends OptionValue> {
   name: string;
+  onChange: (value: T) => void;
+  value: T;
+}
+
+const Context = createContext<IContext<any>>({
+  name: '',
+  onChange: () => {},
+  value: ''
+});
+
+type Props<T extends OptionValue> = {
+  name: string;
+  value: T;
+  onChange: (value: T) => void;
   children: ReactElement<any>;
 };
 
-export const NameProvider = ({ name, children }: Props) => (
-  <nameContext.Provider value={name}>{children}</nameContext.Provider>
+export const RadioProvider = <T extends OptionValue>({
+  name,
+  value,
+  onChange,
+  children
+}: Props<T>) => (
+  <Context.Provider value={{ name, value, onChange }}>
+    {children}
+  </Context.Provider>
 );
 
-export const useName = () => useContext(nameContext);
+export const useName = () => useContextSelector(Context, (v) => v.name);
+export const useOnChange = () => useContextSelector(Context, (v) => v.onChange);
+export const useValue = () => useContextSelector(Context, (v) => v.value);

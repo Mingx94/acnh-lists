@@ -12,23 +12,19 @@ const FilterMonth = () => {
   const [pickedMonth, setMonth] = useAtom(searchMonth);
 
   return (
-    <Radio className="px-3" label="月份" name="month">
+    <Radio
+      className="px-3"
+      label="月份"
+      name="month"
+      onChange={setMonth}
+      value={pickedMonth}
+    >
       <div className="grid grid-flow-row grid-rows-5 grid-cols-3 sm:grid-rows-4 sm:grid-cols-4 gap-2 sm:gap-4 ">
-        <Option
-          className="col-span-3 sm:col-span-4"
-          value={null}
-          checked={pickedMonth == null}
-          onChange={setMonth}
-        >
+        <Option className="col-span-3 sm:col-span-4" value={null}>
           全部
         </Option>
         {options.map(({ text, value: optVal }) => (
-          <Option
-            key={optVal}
-            value={optVal}
-            checked={pickedMonth == optVal}
-            onChange={setMonth}
-          >
+          <Option key={optVal} value={optVal}>
             {text}
           </Option>
         ))}
