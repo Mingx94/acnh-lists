@@ -19,7 +19,7 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="動物森友會魚類列表" />
         </Head>
-        <body>
+        <body className="bg-teal-100">
           <Main />
           <NextScript />
         </body>
