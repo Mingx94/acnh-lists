@@ -4,11 +4,8 @@ export const searchName = atom('');
 
 export const hemisphere = atom<'north' | 'south'>('north');
 
-const now = new Date();
-const currentMonth = (now.getMonth() + 1) as MonthRange;
-export const searchMonth = atom<MonthRange | -1>(currentMonth);
+export const searchMonth = atom<MonthRange | -1>(-1);
 
-const currentHour = now.getHours() as TimeRange;
-export const searchHour = atom<TimeRange | -1>(currentHour);
+export const searchHour = atom<TimeRange | -1>(-1);
 
 export const dirPrice = atom<'asc' | 'desc'>('asc');

@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { AxiosResponse } from 'axios';
@@ -22,10 +23,18 @@ import Sorting from '~/containers/Sorting';
 
 export default function Home({ list }: { list: Fish[] }) {
   const [name] = useAtom(searchName);
-  const [month] = useAtom(searchMonth);
+  const [month, setMonth] = useAtom(searchMonth);
   const [hemisP] = useAtom(hemisphere);
-  const [hour] = useAtom(searchHour);
+  const [hour, setHour] = useAtom(searchHour);
   const [priceDir] = useAtom(dirPrice);
+
+  useLayoutEffect(() => {
+    const now = new Date();
+    const currentMonth = (now.getMonth() + 1) as MonthRange;
+    const currentHour = now.getHours() as TimeRange;
+    setMonth(currentMonth);
+    setHour(currentHour);
+  }, []);
 
   const filteredList = list
     .filter(
