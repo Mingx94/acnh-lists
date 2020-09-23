@@ -5,19 +5,27 @@ import { useAtom } from 'jotai';
 import { toCamel } from 'convert-keys';
 
 import axios from '~/utils/request';
-import { hemisphere, searchHour, searchMonth, searchName } from '~/atoms';
+import {
+  hemisphere,
+  dirPrice,
+  searchHour,
+  searchMonth,
+  searchName
+} from '~/atoms';
 
 import CreatureCard from '~/components/CreatureCard';
 import FilterName from '~/containers/FilterName';
 import FilterMonth from '~/containers/FilterMonth';
 import FilterHemis from '~/containers/FilterHemis';
 import FilterHour from '~/containers/FilterHour';
+import Sorting from '~/containers/Sorting';
 
 export default function Home({ list }: { list: Fish[] }) {
   const [name] = useAtom(searchName);
   const [month] = useAtom(searchMonth);
   const [hemisP] = useAtom(hemisphere);
   const [hour] = useAtom(searchHour);
+  const [priceDir] = useAtom(dirPrice);
 
   const filteredList = list
     .filter(
@@ -35,7 +43,7 @@ export default function Home({ list }: { list: Fish[] }) {
       }
     )
     .sort((a, b) => {
-      return a.price - b.price;
+      return priceDir == 'asc' ? a.price - b.price : b.price - a.price;
     });
 
   return (
@@ -50,6 +58,11 @@ export default function Home({ list }: { list: Fish[] }) {
           <FilterMonth />
           <FilterHour />
         </div>
+        <div className="flex flex-wrap items-center p-3">
+          <span className="mr-2">排序:</span>
+          <Sorting />
+        </div>
+        <div className="flex flex-wrap"></div>
         <div className="grid gap-4 p-2 sm:gap-8 grid-cols-auto-120">
           {filteredList.map((fish) => (
             <CreatureCard key={fish.id} {...fish} />

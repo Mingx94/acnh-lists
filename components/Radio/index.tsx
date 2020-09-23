@@ -21,8 +21,10 @@ const Radio = <T extends OptionValue>({
 }: Props<T>) => {
   return (
     <RadioProvider name={name} onChange={onChange} value={value}>
-      <div className={classNames(className, 'flex flex-wrap py-3 items-center')}>
-        {label && <legend className="">{label}:</legend>}
+      <div
+        className={classNames(className, 'flex flex-wrap py-3 items-center')}
+      >
+        {label && <span className="mr-1">{label}:</span>}
         {children}
       </div>
     </RadioProvider>

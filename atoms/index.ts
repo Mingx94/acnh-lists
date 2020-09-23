@@ -10,3 +10,5 @@ export const searchMonth = atom<MonthRange | -1>(currentMonth);
 
 const currentHour = now.getHours() as TimeRange;
 export const searchHour = atom<TimeRange | -1>(currentHour);
+
+export const dirPrice = atom<'asc' | 'desc'>('asc');
