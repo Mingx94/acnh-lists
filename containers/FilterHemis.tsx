@@ -1,6 +1,15 @@
 import { useAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import { hemisphere } from '~/atoms';
-import Radio, { Option } from '~/components/Radio';
+import { TRadio } from '~/components/Radio';
+
+const Radio = dynamic(() => import('~/components/Radio'), {
+  ssr: false
+}) as TRadio;
+
+const Option = dynamic(() => import('~/components/Radio/Option'), {
+  ssr: false
+});
 
 const FilterHemis = () => {
   const [hemis, setHemis] = useAtom(hemisphere);

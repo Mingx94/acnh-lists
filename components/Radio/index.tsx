@@ -31,6 +31,8 @@ const Radio = <T extends OptionValue>({
   );
 };
 
-export default memo(Radio) as typeof Radio;
+export type TRadio = typeof Radio
+
+export default memo(Radio) as TRadio;
 
 export { default as Option } from './Option';

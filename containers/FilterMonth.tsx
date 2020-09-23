@@ -1,7 +1,12 @@
+import dynamic from 'next/dynamic';
 import { useAtom } from 'jotai';
 import { useCallback } from 'react';
 import { searchMonth } from '~/atoms';
-import Select, { Option } from '~/components/Select';
+
+const Select = dynamic(() => import('~/components/Select'), { ssr: false });
+const Option = dynamic(() => import('~/components/Select/Option'), {
+  ssr: false
+});
 
 const months = Array.from(Array(12)).map((_, x) => x + 1) as Array<
   NumRange<1, 13>

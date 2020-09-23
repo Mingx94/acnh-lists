@@ -1,6 +1,10 @@
+import dynamic from 'next/dynamic';
 import { useAtom } from 'jotai';
 import { searchName } from '~/atoms';
-import InputText from '~/components/InputText';
+
+const InputText = dynamic(() => import('~/components/InputText'), {
+  ssr: false
+});
 
 const FilterName = () => {
   const [search, setSearch] = useAtom(searchName);
