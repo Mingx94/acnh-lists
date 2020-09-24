@@ -1,8 +1,6 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import classNames from 'classnames';
 import { useName, useOnChange, useValue } from './context';
-
-let ID = 1;
 
 type TOption<T extends OptionValue> = {
   value: T;
@@ -10,16 +8,17 @@ type TOption<T extends OptionValue> = {
 };
 
 type Props<T extends OptionValue> = TOption<T> & {
+  id: string;
   className?: string;
 };
 
 const Option = <T extends OptionValue>({
+  id,
   className,
   value,
   children
 }: Props<T>) => {
   const name = useName();
-  const id = useMemo(() => name + '-radio-option-' + ID++, [name]);
   const onChange = useOnChange();
   const selectedValue = useValue();
   return (
@@ -38,4 +37,5 @@ const Option = <T extends OptionValue>({
     </label>
   );
 };
+
 export default memo(Option) as typeof Option;

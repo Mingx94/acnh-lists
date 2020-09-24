@@ -1,5 +1,5 @@
-import { useLayoutEffect } from 'react';
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { AxiosResponse } from 'axios';
 import { useAtom } from 'jotai';
@@ -16,25 +16,47 @@ import {
 
 import CreatureCard from '~/components/CreatureCard';
 import FilterName from '~/containers/FilterName';
-import FilterMonth from '~/containers/FilterMonth';
 import FilterHemis from '~/containers/FilterHemis';
-import FilterHour from '~/containers/FilterHour';
 import Sorting from '~/containers/Sorting';
+import Select, { Option } from '~/components/Select';
+
+const FilterMonth = dynamic(() => import('~/containers/FilterMonth'), {
+  ssr: false,
+  loading: () => (
+    <Select
+      id="month-select"
+      className="px-3"
+      label="月份"
+      name="month"
+      onChange={() => {}}
+      value={-1}
+    >
+      <Option value={-1}>全部</Option>
+    </Select>
+  )
+});
+const FilterHour = dynamic(() => import('~/containers/FilterHour'), {
+  ssr: false,
+  loading: () => (
+    <Select
+      id="time-select"
+      className="px-3"
+      label="時間"
+      name="time"
+      onChange={() => {}}
+      value={-1}
+    >
+      <Option value={-1}>全部</Option>
+    </Select>
+  )
+});
 
 export default function Home({ list }: { list: Fish[] }) {
   const [name] = useAtom(searchName);
-  const [month, setMonth] = useAtom(searchMonth);
+  const [month] = useAtom(searchMonth);
   const [hemisP] = useAtom(hemisphere);
-  const [hour, setHour] = useAtom(searchHour);
+  const [hour] = useAtom(searchHour);
   const [priceDir] = useAtom(dirPrice);
-
-  useLayoutEffect(() => {
-    const now = new Date();
-    const currentMonth = (now.getMonth() + 1) as MonthRange;
-    const currentHour = now.getHours() as TimeRange;
-    setMonth(currentMonth);
-    setHour(currentHour);
-  }, []);
 
   const filteredList = list
     .filter(

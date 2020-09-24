@@ -1,16 +1,13 @@
-import dynamic from 'next/dynamic';
 import { useAtom } from 'jotai';
 import { searchName } from '~/atoms';
-
-const InputText = dynamic(() => import('~/components/InputText'), {
-  ssr: false
-});
+import InputText from '~/components/InputText';
 
 const FilterName = () => {
   const [search, setSearch] = useAtom(searchName);
 
   return (
     <InputText
+      id="fish-search"
       className="px-3 w-full"
       label="搜尋"
       name="fish-search"

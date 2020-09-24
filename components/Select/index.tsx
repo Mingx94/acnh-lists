@@ -1,10 +1,9 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import classNames from 'classnames';
 import { SelectOption } from './Option';
 
-let ID = 1;
-
 type Props<T extends SelectOption> = {
+  id: string;
   name: string;
   className: string;
   label: string;
@@ -14,6 +13,7 @@ type Props<T extends SelectOption> = {
 };
 
 const Select = <T extends SelectOption>({
+  id,
   name,
   className,
   value,
@@ -21,7 +21,6 @@ const Select = <T extends SelectOption>({
   onChange,
   children
 }: Props<T>) => {
-  const id = useMemo(() => name + '-select-' + ID++, [name]);
   return (
     <label
       className={classNames(className, 'flex items-center py-3')}

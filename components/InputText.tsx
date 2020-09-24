@@ -1,9 +1,7 @@
-import { useMemo } from 'react';
 import classNames from 'classnames';
 
-let ID = 1;
-
 type Props = {
+  id: string;
   className?: string;
   label: string;
   name: string;
@@ -13,6 +11,7 @@ type Props = {
 };
 
 const InputText = ({
+  id,
   className,
   label,
   name,
@@ -20,7 +19,6 @@ const InputText = ({
   value,
   onChange
 }: Props) => {
-  const id = useMemo(() => name + '-input-text-' + ID++, [name]);
   return (
     <label
       className={classNames(className, 'py-3 flex items-center')}
