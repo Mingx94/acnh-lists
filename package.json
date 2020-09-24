@@ -1,10 +1,11 @@
 {
-  "name": "acnh_fish",
+  "name": "acnh-lists",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static": "next build && next export",
     "start": "next start"
   },
   "dependencies": {

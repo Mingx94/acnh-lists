@@ -20,12 +20,13 @@ import FilterHemis from '~/containers/FilterHemis';
 import FilterMonth from '~/containers/FilterMonth';
 import FilterHour from '~/containers/FilterHour';
 
-export default function Home({ list }: { list: Creature[] }) {
+export default function Insects({ list }: { list: Creature[] }) {
   const [name] = useAtom(searchName);
   const [month] = useAtom(searchMonth);
   const [hemisP] = useAtom(hemisphere);
   const [hour] = useAtom(searchHour);
   const [priceDir] = useAtom(dirPrice);
+
 
   const filteredList = list
     .filter(
@@ -49,7 +50,7 @@ export default function Home({ list }: { list: Creature[] }) {
   return (
     <div>
       <Head>
-        <title>Animal Crossing Fish List</title>
+        <title>Animal Crossing Insects List</title>
       </Head>
       <main className="container mx-auto py-10">
         <div className="flex flex-wrap">
@@ -73,8 +74,9 @@ export default function Home({ list }: { list: Creature[] }) {
   );
 }
 
+
 export const getStaticProps: GetStaticProps = async () => {
-  const res: AxiosResponse<ApiCreature[]> = await axios.get('fish');
+  const res: AxiosResponse<ApiCreature[]> = await axios.get('Bugs');
   const list = res.data.map<Creature>(toCamel);
 
   return {

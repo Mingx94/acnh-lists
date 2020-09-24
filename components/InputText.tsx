@@ -5,7 +5,7 @@ type Props = {
   className?: string;
   label: string;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   value: string;
   onChange: (value: string) => void;
 };
