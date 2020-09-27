@@ -28,6 +28,7 @@ const Option = <T extends OptionValue>({
     >
       <input
         type="radio"
+        className="form-radio"
         name={name}
         id={id}
         checked={selectedValue == value}

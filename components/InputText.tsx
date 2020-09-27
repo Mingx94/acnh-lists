@@ -31,7 +31,7 @@ const InputText = ({
           id={id}
           name={name}
           placeholder={placeholder}
-          className="border border-gray-500 hover:border-blue-500 focus:border-blue-500 text-gray-900 rounded outline-none px-3 py-1 w-full"
+          className="form-input block w-full transition duration-100"
           value={value}
           onChange={(event) => {
             onChange(event.target.value);

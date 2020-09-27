@@ -39,7 +39,7 @@ const Sorting = () => {
   const [dir, setDir] = useAtom(dirPrice);
   return (
     <button
-      className="flex items-center h-10 text-sm bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+      className="flex items-center h-10 text-sm bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow transition duration-150"
       onClick={() => setDir((prev) => (prev == 'asc' ? 'desc' : 'asc'))}
     >
       <span className="mr-1">價格</span>
