@@ -1,9 +1,9 @@
+import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { Provider } from 'jotai';
 import Header from '~/components/Header';
 
-import '~/styles/globals.scss';
-import Head from 'next/head';
+import '~/styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
