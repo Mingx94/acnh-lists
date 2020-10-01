@@ -50,7 +50,7 @@ class MyDocument extends Document {
           />
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#9af280" />
-          <link rel="shortcut icon" href="/favicon.ico" />
+	        <link rel="icon" type="image/png" href="favicon.png"/>          
         </Head>
         <body className="bg-teal-100">
           <Main />
