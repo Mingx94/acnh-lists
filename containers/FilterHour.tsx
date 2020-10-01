@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { searchHour } from '~/atoms';
 import Select, { Option } from '~/components/Select';
 
-const months = Array.from(Array(24)).map((_, x) => x) as Array<NumRange<0, 24>>;
+const hours = Array.from(Array(24)).map((_, x) => x) as Array<NumRange<0, 24>>;
 
-const options = months.map((v) => ({ text: `${v}`, value: v }));
+const options = hours.map((v) => ({ text: `${v}`, value: v }));
 
 const FilterHour = () => {
   const [pickedHour, setHour] = useAtom(searchHour);
