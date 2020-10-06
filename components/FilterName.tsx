@@ -1,9 +1,9 @@
-import { useAtom } from 'jotai';
-import { searchName } from '~/atoms';
+import { memo } from 'react';
+import { useSearchName } from '~/atoms';
 import InputText from '~/components/InputText';
 
 const FilterName = () => {
-  const [search, setSearch] = useAtom(searchName);
+  const [search, setSearch] = useSearchName();
 
   return (
     <InputText
@@ -17,4 +17,4 @@ const FilterName = () => {
   );
 };
 
-export default FilterName;
+export default memo(FilterName);

@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { searchMonth } from '~/atoms';
 import Select, { Option } from '~/components/Select';
 
@@ -39,4 +39,4 @@ const FilterMonth = () => {
   );
 };
 
-export default FilterMonth;
+export default memo(FilterMonth);

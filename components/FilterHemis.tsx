@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai';
+import { memo } from 'react';
 import { hemisphere } from '~/atoms';
 import Radio, { Option } from '~/components/Radio';
 
@@ -25,4 +26,4 @@ const FilterHemis = () => {
   );
 };
 
-export default FilterHemis;
+export default memo(FilterHemis);

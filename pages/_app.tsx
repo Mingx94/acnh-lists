@@ -12,7 +12,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
       </Head>
       <Header />
-      <Component {...pageProps} />
+
+      <main className="container mx-auto py-10">
+        <Component {...pageProps} />
+      </main>
     </Provider>
   );
 }

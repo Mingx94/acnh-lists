@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { searchHour } from '~/atoms';
 import Select, { Option } from '~/components/Select';
 
@@ -37,4 +37,4 @@ const FilterHour = () => {
   );
 };
 
-export default FilterHour;
+export default memo(FilterHour);
