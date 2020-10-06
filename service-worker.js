@@ -4,17 +4,17 @@ import {
   NetworkOnly,
   NetworkFirst,
   CacheFirst,
-  StaleWhileRevalidate
+  StaleWhileRevalidate,
 } from 'workbox-strategies';
 import {
   registerRoute,
   setDefaultHandler,
-  setCatchHandler
+  setCatchHandler,
 } from 'workbox-routing';
 import {
   matchPrecache,
   precacheAndRoute,
-  cleanupOutdatedCaches
+  cleanupOutdatedCaches,
 } from 'workbox-precaching';
 
 skipWaiting();
@@ -23,11 +23,11 @@ clientsClaim();
 // must include following lines when using inject manifest module from workbox
 // https://developers.google.com/web/tools/workbox/guides/precache-files/workbox-build#add_an_injection_point
 const WB_MANIFEST = self.__WB_MANIFEST;
-// Precache fallback route and image
-WB_MANIFEST.push({
-  url: '/fallback',
-  revision: '1234567890'
-});
+// // Precache fallback route and image
+// WB_MANIFEST.push({
+//   url: '/fallback',
+//   revision: '1234567890',
+// });
 precacheAndRoute(WB_MANIFEST);
 
 cleanupOutdatedCaches();
@@ -39,52 +39,52 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: 1,
         maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
+        purgeOnQuotaError: !0,
+      }),
+    ],
   }),
   'GET'
 );
-registerRoute(
-  /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
-  new CacheFirst({
-    cacheName: 'google-fonts',
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 4,
-        maxAgeSeconds: 31536e3,
-        purgeOnQuotaError: !0
-      })
-    ]
-  }),
-  'GET'
-);
-registerRoute(
-  /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
-  new StaleWhileRevalidate({
-    cacheName: 'static-font-assets',
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 4,
-        maxAgeSeconds: 604800,
-        purgeOnQuotaError: !0
-      })
-    ]
-  }),
-  'GET'
-);
+// registerRoute(
+//   /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
+//   new CacheFirst({
+//     cacheName: 'google-fonts',
+//     plugins: [
+//       new ExpirationPlugin({
+//         maxEntries: 4,
+//         maxAgeSeconds: 31536e3,
+//         purgeOnQuotaError: !0,
+//       }),
+//     ],
+//   }),
+//   'GET'
+// );
+// registerRoute(
+//   /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
+//   new StaleWhileRevalidate({
+//     cacheName: 'static-font-assets',
+//     plugins: [
+//       new ExpirationPlugin({
+//         maxEntries: 4,
+//         maxAgeSeconds: 604800,
+//         purgeOnQuotaError: !0,
+//       }),
+//     ],
+//   }),
+//   'GET'
+// );
 // disable image cache, so we could observe the placeholder image when offline
 registerRoute(
   /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
-  new NetworkOnly({
+  new CacheFirst({
     cacheName: 'static-image-assets',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 64,
         maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
+        purgeOnQuotaError: !0,
+      }),
+    ],
   }),
   'GET'
 );
@@ -96,9 +96,9 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: 32,
         maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
+        purgeOnQuotaError: !0,
+      }),
+    ],
   }),
   'GET'
 );
@@ -110,9 +110,9 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: 32,
         maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
+        purgeOnQuotaError: !0,
+      }),
+    ],
   }),
   'GET'
 );
@@ -124,42 +124,42 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: 32,
         maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
+        purgeOnQuotaError: !0,
+      }),
+    ],
   }),
   'GET'
 );
-registerRoute(
-  /\/api\/.*$/i,
-  new NetworkFirst({
-    cacheName: 'apis',
-    networkTimeoutSeconds: 10,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 16,
-        maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
-  }),
-  'GET'
-);
-registerRoute(
-  /\/api\/.*$/i,
-  new NetworkFirst({
-    cacheName: 'apis',
-    networkTimeoutSeconds: 10,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 16,
-        maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
-  }),
-  'POST'
-);
+// registerRoute(
+//   /\/api\/.*$/i,
+//   new NetworkFirst({
+//     cacheName: 'apis',
+//     networkTimeoutSeconds: 10,
+//     plugins: [
+//       new ExpirationPlugin({
+//         maxEntries: 16,
+//         maxAgeSeconds: 86400,
+//         purgeOnQuotaError: !0,
+//       }),
+//     ],
+//   }),
+//   'GET'
+// );
+// registerRoute(
+//   /\/api\/.*$/i,
+//   new NetworkFirst({
+//     cacheName: 'apis',
+//     networkTimeoutSeconds: 10,
+//     plugins: [
+//       new ExpirationPlugin({
+//         maxEntries: 16,
+//         maxAgeSeconds: 86400,
+//         purgeOnQuotaError: !0,
+//       }),
+//     ],
+//   }),
+//   'POST'
+// );
 registerRoute(
   /.*/i,
   new NetworkFirst({
@@ -169,9 +169,9 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: 32,
         maxAgeSeconds: 86400,
-        purgeOnQuotaError: !0
-      })
-    ]
+        purgeOnQuotaError: !0,
+      }),
+    ],
   }),
   'GET'
 );
@@ -193,24 +193,25 @@ setCatchHandler(({ event }) => {
   // Use event, request, and url to figure out how to respond.
   // One approach would be to use request.destination, see
   // https://medium.com/dev-channel/service-worker-caching-strategies-based-on-request-types-57411dd7652c
-  switch (event.request.destination) {
-    case 'document':
-      // If using precached URLs:
-      return matchPrecache('/fallback');
-      // return caches.match('/fallback')
-      break;
-    case 'image':
-      // If using precached URLs:
-      return matchPrecache('/images/fallback.png');
-      // return caches.match('/static/images/fallback.png')
-      break;
-    case 'font':
-    // If using precached URLs:
-    // return matchPrecache(FALLBACK_FONT_URL);
-    //return caches.match('/static/fonts/fallback.otf')
-    //break
-    default:
-      // If we don't have a fallback, just return an error response.
-      return Response.error();
-  }
+  // switch (event.request.destination) {
+  //   case 'document':
+  //     // If using precached URLs:
+  //     return matchPrecache('/fallback');
+  //     // return caches.match('/fallback')
+  //     break;
+  //   case 'image':
+  //     // If using precached URLs:
+  //     return matchPrecache('/images/fallback.png');
+  //     // return caches.match('/static/images/fallback.png')
+  //     break;
+  //   case 'font':
+  //   // If using precached URLs:
+  //   // return matchPrecache(FALLBACK_FONT_URL);
+  //   //return caches.match('/static/fonts/fallback.otf')
+  //   //break
+  //   default:
+  //     // If we don't have a fallback, just return an error response.
+  //     return Response.error();
+  // }
+  return Response.error();
 });
